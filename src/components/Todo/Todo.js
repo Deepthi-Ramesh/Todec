@@ -55,6 +55,9 @@ function Todo() {
   const handlePhoto = (user) => {
     setPhoto(user.photoURL);
   };
+  const handleReload = () => {
+    setIsReloadTodos(true);
+  };
   const [editId, setEditId] = useState(null);
   const [editText, setEditText] = useState("");
   const [matches, setMatches] = useState(
@@ -468,6 +471,7 @@ function Todo() {
         open={popupopen}
         handleClose={handlePopupclose}
         handlePhoto={handlePhoto}
+        handleReload={handleReload}
       />
     </div>
   );

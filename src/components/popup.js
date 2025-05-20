@@ -6,11 +6,17 @@ import { useDispatch } from "react-redux";
 import "./../App.css";
 import cross from "../images/icon-cross.svg";
 
-export default function Popup({ open, handleClose, handlePhoto }) {
+export default function Popup({
+  open,
+  handleClose,
+  handlePhoto,
+  handleReload,
+}) {
   const dispatch = useDispatch();
   const LoginUserFunc = async () => {
     const user = await Login(dispatch);
     handlePhoto(user);
+    handleReload();
     handleClose();
   };
   return (
