@@ -23,6 +23,8 @@ import Popup from "../popup";
 import Login from "../Login/Login";
 import ThemeToggle from "../themeToggle";
 
+import { toast } from "react-toastify";
+
 function Todo() {
   const [isReloadTodos, setIsReloadTodos] = useState(true);
   const [todo, settodo] = useState("");
@@ -100,14 +102,16 @@ function Todo() {
   // create a todo
   const createTodo = async () => {
     if (tommy?.uid) {
-      await addDoc(collection(db, "todos"), {
-        todo: todo,
-        completed: false,
-        id: Date.now(),
-        uid: tommy?.uid,
-      });
+      if (todo.length !== 0) {
+        await addDoc(collection(db, "todos"), {
+          todo: todo,
+          completed: false,
+          id: Date.now(),
+          uid: tommy?.uid,
+        });
 
-      setIsReloadTodos(!isReloadTodos);
+        setIsReloadTodos(!isReloadTodos);
+      }
     } else {
       handlePopupopen();
     }
@@ -253,6 +257,7 @@ function Todo() {
               placeholder="Create a New TODO"
               value={todo}
               id="input"
+              required
               style={{
                 backgroundColor: darkMode
                   ? " hsl(235, 24%, 19%)"
@@ -260,7 +265,11 @@ function Todo() {
                 color: darkMode ? "hsl(234, 39%, 85%)" : "hsl(235, 19%, 35%)",
               }}
               onKeyDown={(e) => {
-                if (e.key === "Enter") createTodo();
+                if (e.key === "Enter") {
+                  if (todo.length != 0) {
+                    createTodo();
+                  }
+                }
               }}
             />
           </div>
@@ -398,6 +407,9 @@ function Todo() {
               <p
                 onClick={() => {
                   clearCompleted();
+                }}
+                style={{
+                  cursor: "pointer",
                 }}
               >
                 Clear Completed
