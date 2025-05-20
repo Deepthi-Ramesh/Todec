@@ -170,8 +170,8 @@ input[type="radio"] {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 30%;
-  background-color: black;
-  color: white;
+  background-color: hsl(233, 10%, 82%);
+  color: rgb(69, 69, 69);
   padding: 2rem;
   text-align: center;
   outline: none;
@@ -202,7 +202,11 @@ input[type="radio"] {
     height: 120vh;
   }
   .popup {
-    width: 70%;
+    width: 65%;
+  }
+  .popup p {
+    font-size: 0.8rem;
+    line-height: 1rem;
   }
   .head {
     width: 78%;
@@ -212,6 +216,9 @@ input[type="radio"] {
     right: 1rem;
     width: 2.5rem;
     height: 2.5rem;
+  }
+  #googlesigin {
+    width: 65%;
   }
 }
 
@@ -238,10 +245,16 @@ input[type="radio"] {
     height: 120vh;
   }
   .popup {
-    width: 70%;
+    width: 50%;
+  }
+  .popup p {
+    font-size: 1.1rem;
   }
   .head {
     width: 60%;
+  }
+  #googlesigin {
+    width: 50%;
   }
 }
 
@@ -268,10 +281,16 @@ input[type="radio"] {
     height: 120vh;
   }
   .popup {
-    width: 70%;
+    width: 50%;
+  }
+  .popup p {
+    font-size: 1.3rem;
   }
   .subcon2 {
     margin-top: -1rem;
+  }
+  #googlesigin {
+    width: 40%;
   }
 }
 

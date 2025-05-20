@@ -31,6 +31,7 @@ function Todo() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+  const photoURL = useSelector((state) => state?.user?.photoURL);
   const todosList = useSelector((state) => state?.todos?.todos);
   const darkMode = useSelector((state) => state?.theme?.darkMode);
   const dispatch = useDispatch();
@@ -47,6 +48,10 @@ function Todo() {
   const [hover, settodoHover] = useState(null);
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handlePhoto = (user) => {
+    setPhoto(user.photoURL);
   };
   const [editId, setEditId] = useState(null);
   const [editText, setEditText] = useState("");
@@ -73,7 +78,8 @@ function Todo() {
     try {
       const user = await Login(dispatch);
       if (user) {
-        setPhoto(user.photoURL);
+        console.log(photoURL);
+        handlePhoto(user);
         setIsReloadTodos(true);
       }
     } catch (error) {
@@ -446,7 +452,11 @@ function Todo() {
           </div>
         </div>
       </div>
-      <Popup open={popupopen} handleClose={handlePopupclose} />
+      <Popup
+        open={popupopen}
+        handleClose={handlePopupclose}
+        handlePhoto={handlePhoto}
+      />
     </div>
   );
 }

@@ -1,17 +1,23 @@
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+
 import Modal from "@mui/material/Modal";
 import Login from "./Login/Login";
 import { useDispatch } from "react-redux";
 import "./../App.css";
+import cross from "../images/icon-cross.svg";
 
-export default function Popup({ open, handleClose }) {
+export default function Popup({ open, handleClose, handlePhoto }) {
   const dispatch = useDispatch();
+  const LoginUserFunc = async () => {
+    const user = await Login(dispatch);
+    handlePhoto(user);
+    handleClose();
+  };
   return (
     <div>
       <Modal open={open} onClose={handleClose}>
         <Box className="popup">
-          <div
+          <img
             onClick={handleClose}
             style={{
               background: "transparent",
@@ -20,22 +26,18 @@ export default function Popup({ open, handleClose }) {
               fontSize: "1.4rem",
               paddingBottom: "1rem",
             }}
-          >
-            X
-          </div>
-          <Typography style={{ marginTop: "2rem" }}>
-            Sigin to TODEC with google.com
-          </Typography>
+            src={cross}
+          />
+
+          <p style={{ marginTop: "2rem" }}>Sigin to TODEC with google.com</p>
           <img
             src={require("../images/google.png")}
             width={"65%"}
+            id="googlesigin"
             style={{
               marginTop: "1rem",
             }}
-            onClick={() => {
-              Login(dispatch);
-              handleClose();
-            }}
+            onClick={LoginUserFunc}
           />
         </Box>
       </Modal>
